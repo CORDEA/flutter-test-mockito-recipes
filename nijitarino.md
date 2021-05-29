@@ -40,7 +40,9 @@ class FindProfileUseCase {
 }
 ```
 
-## thenAnswer
+## Recipe
+
+### thenAnswer
 
 `thenAnswer` を使用して `realInvocation` を見ることで引数を取得することができます。
 

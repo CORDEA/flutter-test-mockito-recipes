@@ -45,7 +45,9 @@ class UpdateProfileUseCase {
 
 引数の検証としては主に 2 つ方法があります。
 
-## argThat
+## Recipe
+
+### argThat
 
 `argThat` を使用することで `Matcher` を渡すことができます。
 
@@ -59,9 +61,8 @@ test('test', () {
 });
 ```
 
-### predicate
-
-また、任意の条件を指定したい場合、`predicate` が使えるでしょう。
+{% hint style="info" %}
+任意の条件を指定したい場合は `predicate` が使えます。
 
 ```dart
 test('test', () {
@@ -73,8 +74,9 @@ test('test', () {
       .execute(argThat(predicate<Profile>((v) => v.name == 'name'))));
 });
 ```
+{% endhint %}
 
-## captureAny
+### captureAny
 
 `captureAny` によって引数を取得することができます。
 

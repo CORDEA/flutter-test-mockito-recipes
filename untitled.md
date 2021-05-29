@@ -22,7 +22,9 @@ RxDart の `Subject` を使うような場合でも基本的には同じ方法�
 
 いくつか方法があります。
 
-## expectLater
+## Recipe
+
+### expectLater
 
 ```dart
 test('test', () {
@@ -53,7 +55,7 @@ test('test', () {
 });
 ```
 
-## expectAsync
+### expectAsync
 
 ```dart
 test('test', () {
