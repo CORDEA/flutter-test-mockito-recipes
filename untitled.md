@@ -1,8 +1,8 @@
 ---
-description: ここでは flutter_test / test の expectLater を使って Stream に流れる値を確認します
+description: Stream に流れる値を検証したいとき
 ---
 
-# Stream に流れる値の確認
+# Stream に流れる値の検証
 
 とりあえず以下のような class があったとして、body の値を確認したいとします。
 
