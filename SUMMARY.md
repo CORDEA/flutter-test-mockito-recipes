@@ -1,5 +1,5 @@
 # Table of contents
 
 * [はじめに](README.md)
-* [Untitled](untitled.md)
+* [Stream に流れる値の確認](untitled.md)
 
