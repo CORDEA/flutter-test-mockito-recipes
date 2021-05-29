@@ -43,40 +43,6 @@ class UpdateProfileUseCase {
 }
 ```
 
-まず、`#execute` が呼び出されているかどうかについては `verify` で確認しますので、前もって記載しておきます。
-
-```dart
-@GenerateMocks([
-  UpdateProfileUseCase,
-])
-void main() {
-  late MockUpdateProfileUseCase updateProfileUseCase;
-  late ProfileViewModel viewModel;
-
-  setUp(() {
-    updateProfileUseCase = MockUpdateProfileUseCase();
-    viewModel = ProfileViewModel(
-      profile: Profile(
-        id: 0,
-        groupId: 0,
-        name: '',
-        thumbnailUrl: '',
-        location: '',
-      ),
-      updateProfileUseCase: updateProfileUseCase,
-    );
-  });
-
-  test('test', () {
-    viewModel.onNameChanged('name');
-
-    viewModel.onSubmitTapped();
-
-    verify(updateProfileUseCase.execute(any));
-  });
-}
-```
-
 引数の検証としては主に 2 つ方法があります。
 
 ## argThat
@@ -123,5 +89,59 @@ test('test', () {
 
   expect(profile.name, 'name');
 });
+```
+
+## Result
+
+```dart
+@GenerateMocks([
+  UpdateProfileUseCase,
+])
+void main() {
+  late MockUpdateProfileUseCase updateProfileUseCase;
+  late ProfileViewModel viewModel;
+
+  setUp(() {
+    updateProfileUseCase = MockUpdateProfileUseCase();
+    viewModel = ProfileViewModel(
+      profile: Profile(
+        id: 0,
+        groupId: 0,
+        name: '',
+        thumbnailUrl: '',
+        location: '',
+      ),
+      updateProfileUseCase: updateProfileUseCase,
+    );
+  });
+
+  test('test', () {
+    viewModel.onNameChanged('name');
+  
+    viewModel.onSubmitTapped();
+  
+    verify(updateProfileUseCase.execute(argThat(isNotNull)));
+  });
+  
+  test('test', () {
+    viewModel.onNameChanged('name');
+  
+    viewModel.onSubmitTapped();
+  
+    verify(updateProfileUseCase
+        .execute(argThat(predicate<Profile>((v) => v.name == 'name'))));
+  });
+  
+  test('test', () {
+    viewModel.onNameChanged('name');
+  
+    viewModel.onSubmitTapped();
+  
+    final profile =
+        verify(updateProfileUseCase.execute(captureAny)).captured.first;
+  
+    expect(profile.name, 'name');
+  });
+}
 ```
 
